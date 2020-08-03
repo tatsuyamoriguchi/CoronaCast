@@ -45,8 +45,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         completionHandler([.alert, .sound, .badge])
     }
     
-    
-    
+        
     func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
   
         let subscription = CKQuerySubscription(recordType: "Notification", predicate: NSPredicate(format: "TRUEPREDICATE"), options: .firesOnRecordCreation)
@@ -58,13 +57,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         //this will use the 'content' field in the Record type 'notifications' as the content of the push notification
             info.alertLocalizationKey = "%1$@"
             info.alertLocalizationArgs = ["content"]
+        
+        
         //info.alertBody = "Hello A new message has been posted"
         info.shouldBadge = true
         info.soundName = "default"
 
         subscription.notificationInfo = info
         
-        CKContainer.default().publicCloudDatabase.save(subscription, completionHandler: { sunscription, error in
+        CKContainer.default().publicCloudDatabase.save(subscription, completionHandler: { subscription, error in
             if error == nil {
                 
             } else {

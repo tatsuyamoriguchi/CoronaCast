@@ -16,6 +16,8 @@
 		8C6BD29224D3E7EE00F83B21 /* NewsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C6BD29124D3E7EE00F83B21 /* NewsViewController.swift */; };
 		8C6DFB0924CE476A00020AB3 /* Convert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C6DFB0824CE476A00020AB3 /* Convert.swift */; };
 		8C6EF97624CF9AFD00F533A0 /* DashboardTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C6EF97524CF9AFD00F533A0 /* DashboardTableViewController.swift */; };
+		8C7317E424D7FE96001C63D1 /* MessagesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7317E324D7FE96001C63D1 /* MessagesTableViewController.swift */; };
+		8C7317E724D808FD001C63D1 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7317E624D808FD001C63D1 /* Message.swift */; };
 		8CA893ED24C264AC004A7315 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA893EC24C264AC004A7315 /* AppDelegate.swift */; };
 		8CA893EF24C264AC004A7315 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA893EE24C264AC004A7315 /* SceneDelegate.swift */; };
 		8CA893F124C264AC004A7315 /* DashboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA893F024C264AC004A7315 /* DashboardViewController.swift */; };
@@ -36,6 +38,8 @@
 		8C6DFB0824CE476A00020AB3 /* Convert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Convert.swift; sourceTree = "<group>"; };
 		8C6EC66F24D5568200250AEE /* CoronaCast.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = CoronaCast.entitlements; sourceTree = "<group>"; };
 		8C6EF97524CF9AFD00F533A0 /* DashboardTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardTableViewController.swift; sourceTree = "<group>"; };
+		8C7317E324D7FE96001C63D1 /* MessagesTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagesTableViewController.swift; sourceTree = "<group>"; };
+		8C7317E624D808FD001C63D1 /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 		8CA893E924C264AC004A7315 /* CoronaCast.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CoronaCast.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8CA893EC24C264AC004A7315 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8CA893EE24C264AC004A7315 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -100,10 +104,12 @@
 				8CF5D81424CD121B005284C6 /* CountriesTableViewController.swift */,
 				8C2A344F24D151B500B689B5 /* NewsFeedViewController.swift */,
 				8C6BD29124D3E7EE00F83B21 /* NewsViewController.swift */,
+				8C7317E324D7FE96001C63D1 /* MessagesTableViewController.swift */,
 				8C376E9324C54B7000A6DB0B /* GlobalData.swift */,
 				8C66EF7224CD493000D8B53C /* CountriesData.swift */,
 				8C2A345124D156DC00B689B5 /* NewsData.swift */,
 				8C6DFB0824CE476A00020AB3 /* Convert.swift */,
+				8C7317E624D808FD001C63D1 /* Message.swift */,
 			);
 			path = CoronaCast;
 			sourceTree = "<group>";
@@ -187,10 +193,12 @@
 				8C376E9424C54B7000A6DB0B /* GlobalData.swift in Sources */,
 				8C6EF97624CF9AFD00F533A0 /* DashboardTableViewController.swift in Sources */,
 				8C2A345224D156DC00B689B5 /* NewsData.swift in Sources */,
+				8C7317E424D7FE96001C63D1 /* MessagesTableViewController.swift in Sources */,
 				8CF5D81524CD121B005284C6 /* CountriesTableViewController.swift in Sources */,
 				8C66EF7324CD493000D8B53C /* CountriesData.swift in Sources */,
 				8CA893EF24C264AC004A7315 /* SceneDelegate.swift in Sources */,
 				8C2A345024D151B500B689B5 /* NewsFeedViewController.swift in Sources */,
+				8C7317E724D808FD001C63D1 /* Message.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
