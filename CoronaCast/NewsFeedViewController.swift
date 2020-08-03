@@ -97,7 +97,7 @@ class NewsFeedViewController: UIViewController, UITableViewDelegate, UITableView
         
         // nil found in selectedCountry4News
         let url = NewsData().baseUrl + selectedCountry4News! + NewsData().subscription
-        newsData = [Feed]()
+        //newsData = [Feed]()
         getData(from: url)
         
         DispatchQueue.main.async {

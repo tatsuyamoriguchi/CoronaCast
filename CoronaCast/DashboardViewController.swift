@@ -12,6 +12,9 @@ class DashboardViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+  //      UIApplication.shared.applicationIconBadgeNumber = 0
+      
     }
 }
 
