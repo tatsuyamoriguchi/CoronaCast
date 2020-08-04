@@ -10,24 +10,27 @@ import UIKit
 import CloudKit
 
 
-class MessagesTableViewController: UITableViewController {
+class MessagesTableViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
+    @IBOutlet weak var tableView: UITableView!
     var messages = [Message]()
+    var badgeNumber: Int?
+
     
-//    override func viewDidLoad() {
-//        super.viewDidLoad()
+    @IBAction func refreshPressedOn(_ sender: UIButton) {
+        self.resetBadgeCounter()
+        badgeNumber = 0
+        //loadMessages()
+        self.tableView.reloadData()
+        print("Did refresh")
+    }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
-    
-      
-//        if let indexPath = tableView.indexPathForSelectedRow {
-//            tableView.deselectRow(at: indexPath, animated: true)
-//        }
         
-        //if MessagesTableViewController.isDirty {
 
+        badgeNumber = UIApplication.shared.applicationIconBadgeNumber
         loadMessages()
-        //}
         //resetBadgeCounter()
 
         tableView.reloadData()
@@ -44,13 +47,14 @@ class MessagesTableViewController: UITableViewController {
         
         badgeResetOperation.modifyBadgeCompletionBlock = { (error) -> Void in
             
+            
             if error != nil {
                 print("Error resetting badge: \(String(describing: error))")
             } else {
                 DispatchQueue.main.async {
-                    //UIApplication.shared.applicationIconBadgeNumber = 0
-                    UIApplication.shared.applicationIconBadgeNumber -= 1
-                    self.badgeNumber -= 1
+                    UIApplication.shared.applicationIconBadgeNumber = 0
+                    //UIApplication.shared.applicationIconBadgeNumber -= 1
+                    
                 }
             }
         }
@@ -93,6 +97,7 @@ class MessagesTableViewController: UITableViewController {
             message.url = record["url"]
             
             newMessages.append(message)
+            
         }
         
         operation.queryCompletionBlock = { [unowned self] (cursor, error) in
@@ -118,17 +123,16 @@ class MessagesTableViewController: UITableViewController {
 
 
 
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
 
         return self.messages.count
     }
 
     
-    var badgeNumber = UIApplication.shared.applicationIconBadgeNumber
 
     
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
         
         let creationDateString: String?
@@ -141,36 +145,41 @@ class MessagesTableViewController: UITableViewController {
 
         cell.textLabel?.attributedText = makeAttributedString(title: messages[indexPath.row].content, subtitle: creationDateString!)
         cell.textLabel?.numberOfLines = 0
+
         
-        badgeNumber = UIApplication.shared.applicationIconBadgeNumber
+        //badgeNumber = UIApplication.shared.applicationIconBadgeNumber
         print("badgeNumber")
         print(badgeNumber)
         print("indexPath.row")
         print(indexPath.row)
 
 
-        if indexPath.row < badgeNumber {
-            cell.accessoryType = .none
+        if indexPath.row < badgeNumber! {
+            //cell.accessoryType = .none
+            cell.backgroundColor = .white
+
         } else {
-            cell.accessoryType = .checkmark
+            //cell.accessoryType = .checkmark
+            cell.backgroundColor = .systemGray4
         }
         
         return cell
     }
     
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-
-        if let cell = tableView.cellForRow(at: indexPath) {
-            if cell.accessoryType == .none { //if cell.accessoryType == .none {
-                
-//                UIApplication.shared.applicationIconBadgeNumber -= 1
-//                badgeNumber -= 1
-                resetBadgeCounter()
-                cell.accessoryType = .checkmark
-                //tableView.reloadData()
-            }
-        }
-    }
+//    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+//
+//        if let cell = tableView.cellForRow(at: indexPath) {
+//            if cell.accessoryType == .none { //if cell.accessoryType == .none {
+////            if cell.backgroundColor == .white {
+////                UIApplication.shared.applicationIconBadgeNumber -= 1
+////                badgeNumber -= 1
+//                resetBadgeCounter()
+//                cell.backgroundColor = .systemGray4
+//                cell.accessoryType = .checkmark
+//                //tableView.reloadData()
+//            }
+//        }
+//    }
 
 //    override func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
 //        if let cell = tableView.cellForRow(at: indexPath) {
