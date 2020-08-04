@@ -14,16 +14,19 @@ class MessagesTableViewController: UITableViewController {
 
     var messages = [Message]()
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
+//    override func viewDidLoad() {
+//        super.viewDidLoad()
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+    
       
-        if let indexPath = tableView.indexPathForSelectedRow {
-            tableView.deselectRow(at: indexPath, animated: true)
-        }
+//        if let indexPath = tableView.indexPathForSelectedRow {
+//            tableView.deselectRow(at: indexPath, animated: true)
+//        }
         
         //if MessagesTableViewController.isDirty {
-            loadMessages()
+
+        loadMessages()
         //}
         resetBadgeCounter()
 
