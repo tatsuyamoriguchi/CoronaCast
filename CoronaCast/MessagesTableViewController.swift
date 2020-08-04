@@ -28,7 +28,7 @@ class MessagesTableViewController: UITableViewController {
 
         loadMessages()
         //}
-        resetBadgeCounter()
+        //resetBadgeCounter()
 
         tableView.reloadData()
         
@@ -48,8 +48,9 @@ class MessagesTableViewController: UITableViewController {
                 print("Error resetting badge: \(String(describing: error))")
             } else {
                 DispatchQueue.main.async {
-                    UIApplication.shared.applicationIconBadgeNumber = 0
-                    //self.badgeNumber = 0
+                    //UIApplication.shared.applicationIconBadgeNumber = 0
+                    UIApplication.shared.applicationIconBadgeNumber -= 1
+                    self.badgeNumber -= 1
                 }
             }
         }
@@ -91,8 +92,6 @@ class MessagesTableViewController: UITableViewController {
             message.creationDate = record.creationDate
             message.url = record["url"]
             
-            
-           // message.createdAt = record["createdAt"]
             newMessages.append(message)
         }
         
@@ -143,34 +142,44 @@ class MessagesTableViewController: UITableViewController {
         cell.textLabel?.attributedText = makeAttributedString(title: messages[indexPath.row].content, subtitle: creationDateString!)
         cell.textLabel?.numberOfLines = 0
         
+        badgeNumber = UIApplication.shared.applicationIconBadgeNumber
+        print("badgeNumber")
+        print(badgeNumber)
+        print("indexPath.row")
+        print(indexPath.row)
+
+
         if indexPath.row < badgeNumber {
-            //cell.accessoryType = .none
-            cell.isHighlighted = true
+            cell.accessoryType = .none
         } else {
-            //cell.accessoryType = .checkmark
-            cell.isHighlighted = false
+            cell.accessoryType = .checkmark
         }
         
         return cell
     }
     
-//    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//
-//        if let cell = tableView.cellForRow(at: indexPath) {
-//            if cell.isHighlighted == true { //if cell.accessoryType == .none {
-//                //resetBadgeCounter()
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+
+        if let cell = tableView.cellForRow(at: indexPath) {
+            if cell.accessoryType == .none { //if cell.accessoryType == .none {
+                
 //                UIApplication.shared.applicationIconBadgeNumber -= 1
-//                //cell.accessoryType = .checkmark
-//                cell.isHighlighted = false
-//            }
-//        }
-//    }
-//
+//                badgeNumber -= 1
+                resetBadgeCounter()
+                cell.accessoryType = .checkmark
+                //tableView.reloadData()
+            }
+        }
+    }
+
 //    override func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
 //        if let cell = tableView.cellForRow(at: indexPath) {
-//            if cell.isHighlighted == false {
+//            if cell.accessoryType == .none {
 //                UIApplication.shared.applicationIconBadgeNumber += 1
+//                badgeNumber += 1
 //                cell.isHighlighted = true
+//                tableView.reloadData()
+//
 //            }
 //        }
 //    }
