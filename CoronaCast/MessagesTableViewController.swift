@@ -12,13 +12,23 @@ import CloudKit
 
 class MessagesTableViewController: UITableViewController {
 
+    var messages = [Message]()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        var messages = [Message]()
-        print(messages)
+      
+        if let indexPath = tableView.indexPathForSelectedRow {
+            tableView.deselectRow(at: indexPath, animated: true)
+        }
         
+        //if MessagesTableViewController.isDirty {
+            loadMessages()
+        //}
+        resetBadgeCounter()
 
+        tableView.reloadData()
+        
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
@@ -26,76 +36,141 @@ class MessagesTableViewController: UITableViewController {
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
     }
     
-    
+    func resetBadgeCounter() {
+        let badgeResetOperation = CKModifyBadgeOperation(badgeValue: 0)
+        
+        badgeResetOperation.modifyBadgeCompletionBlock = { (error) -> Void in
+            
+            if error != nil {
+                print("Error resetting badge: \(String(describing: error))")
+            } else {
+                DispatchQueue.main.async {
+                    //UIApplication.shared.applicationIconBadgeNumber -= 1
+                    self.badgeNumber = 0
+                }
+            }
+        }
+        CKContainer.default().add(badgeResetOperation)
+    }
 
     
     
+    func makeAttributedString(title: String, subtitle: String) -> NSAttributedString {
+        let titleAttributes = [NSAttributedString.Key.font: UIFont.preferredFont(forTextStyle: .headline), NSAttributedString.Key.foregroundColor: UIColor.purple]
+        let subtitleAttributes = [NSAttributedString.Key.font: UIFont.preferredFont(forTextStyle: .subheadline)]
+        let titleString = NSMutableAttributedString(string: "\(title)", attributes: titleAttributes)
+        if subtitle.count > 0 {
+            let subtitleString = NSAttributedString(string: "\n\(subtitle)", attributes: subtitleAttributes)
+            titleString.append(subtitleString)
+        }
+        return titleString
+    }
+    
+    
+    func loadMessages() {
+        
+        let predicate = NSPredicate(value: true)
+        let sort = NSSortDescriptor(key: "creationDate", ascending: false)
+        let query = CKQuery(recordType: "Notification", predicate: predicate)
+        query.sortDescriptors = [sort]
+        
+        let operation = CKQueryOperation(query: query)
+        operation.desiredKeys = ["content"]
+        operation.resultsLimit = 10
+        
+        var newMessages = [Message]()
+        
+        operation.recordFetchedBlock = { record in
+        
+            let message = Message()
+            message.recordID = record.recordID
+            message.content = record["content"]
+            message.creationDate = record.creationDate
+            message.url = record["url"]
+            
+            
+           // message.createdAt = record["createdAt"]
+            newMessages.append(message)
+        }
+        
+        operation.queryCompletionBlock = { [unowned self] (cursor, error) in
+            DispatchQueue.main.async {
+                if error == nil {
+                    //MessagesTableViewController.isDirty = false
+                    self.messages = newMessages
+                    
+                    self.tableView.reloadData()
+                } else {
+                    let ac = UIAlertController(title: "Fetch Failed", message: "There was a problem fetching the list of messages. Please try again: \(error!.localizedDescription)", preferredStyle: .alert)
+                    ac.addAction(UIAlertAction(title: "OK", style: .default))
+                    self.present(ac, animated: true)
+                }
+            }
+        }
+        
+        CKContainer.default().publicCloudDatabase.add(operation)
+    }
+  
 
     // MARK: - Table view data source
 
-    override func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
-        return 0
-    }
+
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return 0
+
+        return self.messages.count
     }
 
-    /*
+    
+    var badgeNumber = UIApplication.shared.applicationIconBadgeNumber
+
+    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
+        
+        let creationDateString: String?
+        if let creationDate = messages[indexPath.row].creationDate {
+         
+            creationDateString = Convert().convertDate2LocalDateString(input: creationDate)
+        } else {
+            creationDateString = "No date data available"
+        }
 
-        // Configure the cell...
-
+        cell.textLabel?.attributedText = makeAttributedString(title: messages[indexPath.row].content, subtitle: creationDateString!)
+        cell.textLabel?.numberOfLines = 0
+        
+        if indexPath.row < badgeNumber {
+            //cell.accessoryType = .none
+            cell.isHighlighted = true
+        } else {
+            //cell.accessoryType = .checkmark
+            cell.isHighlighted = false
+        }
+        
         return cell
     }
-    */
+    
+//    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+//
+//        if let cell = tableView.cellForRow(at: indexPath) {
+//            if cell.isHighlighted == true { //if cell.accessoryType == .none {
+//                //resetBadgeCounter()
+//                UIApplication.shared.applicationIconBadgeNumber -= 1
+//                //cell.accessoryType = .checkmark
+//                cell.isHighlighted = false
+//            }
+//        }
+//    }
+//
+//    override func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
+//        if let cell = tableView.cellForRow(at: indexPath) {
+//            if cell.isHighlighted == false {
+//                UIApplication.shared.applicationIconBadgeNumber += 1
+//                cell.isHighlighted = true
+//            }
+//        }
+//    }
 
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
-    }
-    */
-
-    /*
-    // Override to support editing the table view.
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            // Delete the row from the data source
-            tableView.deleteRows(at: [indexPath], with: .fade)
-        } else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
-    }
-    */
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-
-    }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
+    
 }

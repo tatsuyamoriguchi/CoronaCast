@@ -45,6 +45,10 @@ class Convert {
        return timeStamp
     }
     
+    func convertDate2LocalDateString(input: Date) -> String {
+        let localDateString = DateFormatter.localizedString(from: input, dateStyle: .full, timeStyle: .long)
+        return localDateString
+    }
     
     func decimalInLocale(input: Int) -> String {
         let formatter = NumberFormatter()

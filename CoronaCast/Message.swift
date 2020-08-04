@@ -11,7 +11,8 @@ import CloudKit
 
 class Message: NSObject {
 
+    var recordID: CKRecord.ID!
     var content: String!
-//    var CreatedAt: Date!
-
+    var creationDate: Date!
+    var url: String?
 }

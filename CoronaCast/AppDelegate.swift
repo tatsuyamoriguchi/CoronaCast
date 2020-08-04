@@ -10,6 +10,7 @@ import UIKit
 import CloudKit
 import UserNotifications
 
+
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterDelegate {
     
@@ -86,32 +87,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
      // This function will be called right after user tap on the notification
      func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
 
-        //UIApplication.shared.applicationIconBadgeNumber = 0
         
-        resetBedgeCounter()
+        guard let rootViewController = (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.window?.rootViewController else {
+            return
+        }
+        
+        //let sb = UIStoryboard(name: "Main", bundle: nil)
+        //let messagesVC = sb.instantiateViewController(withIdentifier: "MessagesTVC") as! MessagesTableViewController
+        let tabBarController = rootViewController as? UITabBarController
+        tabBarController?.selectedIndex = 2
+        
        // tell the app that we have finished processing the user’s action (eg: tap on notification banner) / response
        completionHandler()
      }
-    
-    func resetBedgeCounter() {
-        let badgeResetOperation = CKModifyBadgeOperation(badgeValue: 0)
-        badgeResetOperation.modifyBadgeCompletionBlock = { (error) -> Void in
-            
-            if error != nil {
-                print("Error resetting badge: \(String(describing: error))")
-            } else {
-                DispatchQueue.main.async {
-                    UIApplication.shared.applicationIconBadgeNumber = 0
-                }
-            }
-        }
-        CKContainer.default().add(badgeResetOperation)
-    }
-    
 
 
-    
-    
+
     
     // MARK: UISceneSession Lifecycle
 

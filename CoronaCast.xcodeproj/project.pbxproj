@@ -108,8 +108,8 @@
 				8C376E9324C54B7000A6DB0B /* GlobalData.swift */,
 				8C66EF7224CD493000D8B53C /* CountriesData.swift */,
 				8C2A345124D156DC00B689B5 /* NewsData.swift */,
-				8C6DFB0824CE476A00020AB3 /* Convert.swift */,
 				8C7317E624D808FD001C63D1 /* Message.swift */,
+				8C6DFB0824CE476A00020AB3 /* Convert.swift */,
 			);
 			path = CoronaCast;
 			sourceTree = "<group>";

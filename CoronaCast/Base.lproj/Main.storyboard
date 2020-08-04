@@ -166,13 +166,13 @@
         <!--Messages-->
         <scene sceneID="E0z-yD-RxE">
             <objects>
-                <tableViewController id="gdW-qi-hEg" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="MessagesTVC" id="gdW-qi-hEg" customClass="MessagesTableViewController" customModule="CoronaCast" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="Lhr-fi-s1c">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell" id="VQ4-2k-mwn">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="Cell" id="VQ4-2k-mwn">
                                 <rect key="frame" x="0.0" y="28" width="414" height="43.5"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="VQ4-2k-mwn" id="5hF-C1-mZ4">
@@ -761,10 +761,10 @@
             </objects>
             <point key="canvasLocation" x="1944.9275362318842" y="807.58928571428567"/>
         </scene>
-        <!--Tab Bar Controller-->
+        <!--My Tab Bar Controller-->
         <scene sceneID="fQk-OB-hQP">
             <objects>
-                <tabBarController id="cDL-ng-9be" sceneMemberID="viewController">
+                <tabBarController storyboardIdentifier="MyTabBarVC" id="cDL-ng-9be" customClass="MyTabBarController" customModule="CoronaCast" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="NHG-x5-FPX">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
