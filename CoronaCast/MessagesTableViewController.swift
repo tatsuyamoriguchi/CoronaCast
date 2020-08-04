@@ -45,8 +45,8 @@ class MessagesTableViewController: UITableViewController {
                 print("Error resetting badge: \(String(describing: error))")
             } else {
                 DispatchQueue.main.async {
-                    //UIApplication.shared.applicationIconBadgeNumber -= 1
-                    self.badgeNumber = 0
+                    UIApplication.shared.applicationIconBadgeNumber = 0
+                    //self.badgeNumber = 0
                 }
             }
         }
