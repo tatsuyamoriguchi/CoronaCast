@@ -38,14 +38,7 @@ class MessagesTableViewController: UIViewController, UITableViewDelegate, UITabl
         self.loadMessages()
       
         self.tableView.reloadData()
-        
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem
-        
-        
+               
         refreshControl.attributedTitle = NSAttributedString(string: "Pull to refresh")
         refreshControl.addTarget(self, action: #selector(self.refresh(_:)), for: UIControl.Event.valueChanged)
         tableView.addSubview(refreshControl)
@@ -104,8 +97,9 @@ class MessagesTableViewController: UIViewController, UITableViewDelegate, UITabl
         query.sortDescriptors = [sort]
         
         let operation = CKQueryOperation(query: query)
-        operation.desiredKeys = ["content"]
+        operation.desiredKeys = ["content", "url"]
         operation.resultsLimit = 10
+        
         
         var newMessages = [Message]()
         
@@ -116,16 +110,14 @@ class MessagesTableViewController: UIViewController, UITableViewDelegate, UITabl
             message.content = record["content"]
             message.creationDate = record.creationDate
             message.url = record["url"]
-            
             newMessages.append(message)
-            
         }
         
         operation.queryCompletionBlock = { [unowned self] (cursor, error) in
             DispatchQueue.main.async {
                 if error == nil {
-                    //MessagesTableViewController.isDirty = false
                     self.messages = newMessages
+                   
                     print("loadMessage() called")
                     self.tableView.reloadData()
                 } else {
@@ -155,64 +147,54 @@ class MessagesTableViewController: UIViewController, UITableViewDelegate, UITabl
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
+        let messageElement = messages[indexPath.row]
         
         let creationDateString: String?
-        if let creationDate = messages[indexPath.row].creationDate {
+        if let creationDate = messageElement.creationDate {
          
             creationDateString = Convert().convertDate2LocalDateString(input: creationDate)
         } else {
             creationDateString = "No date data available"
         }
 
-        cell.textLabel?.attributedText = makeAttributedString(title: messages[indexPath.row].content, subtitle: creationDateString!)
+        cell.textLabel?.attributedText = makeAttributedString(title: messageElement.content, subtitle: creationDateString!)
         cell.textLabel?.numberOfLines = 0
-
-        
-        
-        print("badgeNumber")
-        print(badgeNumber)
-        print("indexPath.row")
-        print(indexPath.row)
 
 
         if indexPath.row < badgeNumber! {
-            //cell.accessoryType = .none
             cell.backgroundColor = .white
 
         } else {
-            //cell.accessoryType = .checkmark
             cell.backgroundColor = .systemGray4
+        }
+                
+        if  messageElement.url != nil {
+            cell.accessoryType = .detailButton
+           
+        } else {
+            cell.accessoryType = .none
+            
         }
         
         return cell
     }
-    
-//    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//
-//        if let cell = tableView.cellForRow(at: indexPath) {
-//            if cell.accessoryType == .none { //if cell.accessoryType == .none {
-////            if cell.backgroundColor == .white {
-////                UIApplication.shared.applicationIconBadgeNumber -= 1
-////                badgeNumber -= 1
-//                resetBadgeCounter()
-//                cell.backgroundColor = .systemGray4
-//                cell.accessoryType = .checkmark
-//                //tableView.reloadData()
-//            }
-//        }
-//    }
 
-//    override func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
-//        if let cell = tableView.cellForRow(at: indexPath) {
-//            if cell.accessoryType == .none {
-//                UIApplication.shared.applicationIconBadgeNumber += 1
-//                badgeNumber += 1
-//                cell.isHighlighted = true
-//                tableView.reloadData()
-//
-//            }
-//        }
-//    }
+
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if let cell = tableView.cellForRow(at: indexPath) {
+            
+            if cell.accessoryType == .detailButton {
+                cell.backgroundColor = .none
+               
+                if let urlString = messages[indexPath.row].url {
+                    let url = URL(string: urlString)
+                    if url != nil { UIApplication.shared.open(url!, options: [:], completionHandler: nil)}
+                }
+                
+            }
+
+        }
+    }
 
     
 }
