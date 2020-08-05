@@ -78,7 +78,9 @@ class MessagesTableViewController: UIViewController, UITableViewDelegate, UITabl
     
     
     func makeAttributedString(title: String, subtitle: String) -> NSAttributedString {
-        let titleAttributes = [NSAttributedString.Key.font: UIFont.preferredFont(forTextStyle: .headline), NSAttributedString.Key.foregroundColor: UIColor.purple]
+        let titleAttributes = [NSAttributedString.Key.font: UIFont.preferredFont(forTextStyle: .headline), NSAttributedString.Key.foregroundColor: UIColor.lightGray]
+        //NSAttributedString.Key.font: UIColor.init(red: 171, green: 252, blue: 274, alpha: 1.0)]
+        
         let subtitleAttributes = [NSAttributedString.Key.font: UIFont.preferredFont(forTextStyle: .subheadline)]
         let titleString = NSMutableAttributedString(string: "\(title)", attributes: titleAttributes)
         if subtitle.count > 0 {
