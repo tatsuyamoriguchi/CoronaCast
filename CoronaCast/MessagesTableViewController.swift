@@ -81,7 +81,8 @@ class MessagesTableViewController: UIViewController, UITableViewDelegate, UITabl
         let titleAttributes = [NSAttributedString.Key.font: UIFont.preferredFont(forTextStyle: .headline), NSAttributedString.Key.foregroundColor: UIColor.lightGray]
         //NSAttributedString.Key.font: UIColor.init(red: 171, green: 252, blue: 274, alpha: 1.0)]
         
-        let subtitleAttributes = [NSAttributedString.Key.font: UIFont.preferredFont(forTextStyle: .subheadline)]
+        let subtitleAttributes = [NSAttributedString.Key.font: UIFont.preferredFont(forTextStyle: .subheadline), NSAttributedString.Key.foregroundColor: UIColor.lightGray]
+        
         let titleString = NSMutableAttributedString(string: "\(title)", attributes: titleAttributes)
         if subtitle.count > 0 {
             let subtitleString = NSAttributedString(string: "\n\(subtitle)", attributes: subtitleAttributes)
