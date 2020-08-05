@@ -15,32 +15,52 @@ class MessagesTableViewController: UIViewController, UITableViewDelegate, UITabl
     @IBOutlet weak var tableView: UITableView!
     var messages = [Message]()
     var badgeNumber: Int?
-
+    
+    var refreshControl = UIRefreshControl()
     
     @IBAction func refreshPressedOn(_ sender: UIButton) {
-        self.resetBadgeCounter()
+
         badgeNumber = 0
-        //loadMessages()
-        self.tableView.reloadData()
-        print("Did refresh")
+        //tableView.reloadData()
+        resetBadgeCounter()
+        DispatchQueue.main.async {
+            self.loadMessages()
+            print("Did refresh")
+        }
+        
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
-        
-
         badgeNumber = UIApplication.shared.applicationIconBadgeNumber
-        loadMessages()
-        //resetBadgeCounter()
 
-        tableView.reloadData()
+        self.loadMessages()
+      
+        self.tableView.reloadData()
         
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
+        
+        
+        refreshControl.attributedTitle = NSAttributedString(string: "Pull to refresh")
+        refreshControl.addTarget(self, action: #selector(self.refresh(_:)), for: UIControl.Event.valueChanged)
+        tableView.addSubview(refreshControl)
     }
+    
+
+    @objc func refresh(_ sender: UIButton) {
+        //self.resetBadgeCounter()
+        badgeNumber = UIApplication.shared.applicationIconBadgeNumber
+        loadMessages()
+        //self.tableView.reloadData()
+        print("Did refresh @objc")
+        refreshControl.endRefreshing()
+    }
+    
     
     func resetBadgeCounter() {
         let badgeResetOperation = CKModifyBadgeOperation(badgeValue: 0)
@@ -54,7 +74,8 @@ class MessagesTableViewController: UIViewController, UITableViewDelegate, UITabl
                 DispatchQueue.main.async {
                     UIApplication.shared.applicationIconBadgeNumber = 0
                     //UIApplication.shared.applicationIconBadgeNumber -= 1
-                    
+                    //self.badgeNumber = 0
+                    print("resetBadgeConunter() called")
                 }
             }
         }
@@ -105,7 +126,7 @@ class MessagesTableViewController: UIViewController, UITableViewDelegate, UITabl
                 if error == nil {
                     //MessagesTableViewController.isDirty = false
                     self.messages = newMessages
-                    
+                    print("loadMessage() called")
                     self.tableView.reloadData()
                 } else {
                     let ac = UIAlertController(title: "Fetch Failed", message: "There was a problem fetching the list of messages. Please try again: \(error!.localizedDescription)", preferredStyle: .alert)
@@ -147,7 +168,7 @@ class MessagesTableViewController: UIViewController, UITableViewDelegate, UITabl
         cell.textLabel?.numberOfLines = 0
 
         
-        //badgeNumber = UIApplication.shared.applicationIconBadgeNumber
+        
         print("badgeNumber")
         print(badgeNumber)
         print("indexPath.row")
