@@ -84,6 +84,7 @@ class NewsViewController: UIViewController, UITextViewDelegate {
                     imageTitle.text = image.title
                 }
                 num += 1
+                
             }
         }
 }
@@ -112,3 +113,4 @@ extension UIImage {
     }
 
 }
+
