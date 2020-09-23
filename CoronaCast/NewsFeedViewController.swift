@@ -96,7 +96,8 @@ class NewsFeedViewController: UIViewController, UITableViewDelegate, UITableView
         }
         
         // nil found in selectedCountry4News
-        let url = NewsData().baseUrl + selectedCountry4News! + NewsData().subscription
+        //let url = NewsData().baseUrl + selectedCountry4News! + NewsData().subscription
+        let url = NewsData().baseUrl + selectedCountry4News! + "/"
         //newsData = [Feed]()
         getData(from: url)
         
@@ -140,7 +141,9 @@ class NewsFeedViewController: UIViewController, UITableViewDelegate, UITableView
             selectedCountry4News = "global"
         }
 
-        let url = NewsData().baseUrl + selectedCountry4News! + NewsData().subscription
+        //let url = NewsData().baseUrl + selectedCountry4News! + NewsData().subscription
+        let url = NewsData().baseUrl + selectedCountry4News! + "/"
+
         newsData = [Feed]()
         getData(from: url)
      
@@ -151,7 +154,35 @@ class NewsFeedViewController: UIViewController, UITableViewDelegate, UITableView
     
     private func getData(from url: String) {
         
-        let task = URLSession.shared.dataTask(with: URL(string: url)!, completionHandler: { data, response, error in
+        let headers = [
+            "x-rapidapi-host": "coronavirus-smartable.p.rapidapi.com",
+            "x-rapidapi-key": "951fa88c89mshba15f133217e822p13c0eejsn7d6f6962e3bf"
+        ]
+
+        let request = NSMutableURLRequest(url: NSURL(string: url)! as URL, cachePolicy: .useProtocolCachePolicy, timeoutInterval: 10.0)
+        
+        request.httpMethod = "GET"
+        request.allHTTPHeaderFields = headers
+        
+        
+        /*
+         let session = URLSession.shared
+         let dataTask = session.dataTask(with: request as URLRequest, completionHandler: { (data, response, error) -> Void in
+             if (error != nil) {
+                 print(error)
+             } else {
+                 let httpResponse = response as? HTTPURLResponse
+                 print(httpResponse)
+             }
+         })
+
+         dataTask.resume()
+         */
+        
+        
+        let task = URLSession.shared.dataTask(with: request as URLRequest, completionHandler: { data, response, error in
+
+//        let task = URLSession.shared.dataTask(with: URL(string: url)!, completionHandler: { data, response, error in
             guard let data = data, error == nil else {
                 print("Something went wrong.")
                 return
@@ -211,3 +242,31 @@ class NewsFeedViewController: UIViewController, UITableViewDelegate, UITableView
     @IBAction func unwind( _ seg: UIStoryboardSegue) {
     }
 }
+
+
+/*
+ import Foundation
+
+ let headers = [
+     "x-rapidapi-host": "coronavirus-smartable.p.rapidapi.com",
+     "x-rapidapi-key": "951fa88c89mshba15f133217e822p13c0eejsn7d6f6962e3bf"
+ ]
+
+ let request = NSMutableURLRequest(url: NSURL(string: "https://coronavirus-smartable.p.rapidapi.com/news/v1/US/")! as URL,
+                                         cachePolicy: .useProtocolCachePolicy,
+                                     timeoutInterval: 10.0)
+ request.httpMethod = "GET"
+ request.allHTTPHeaderFields = headers
+
+ let session = URLSession.shared
+ let dataTask = session.dataTask(with: request as URLRequest, completionHandler: { (data, response, error) -> Void in
+     if (error != nil) {
+         print(error)
+     } else {
+         let httpResponse = response as? HTTPURLResponse
+         print(httpResponse)
+     }
+ })
+
+ dataTask.resume()
+ */
