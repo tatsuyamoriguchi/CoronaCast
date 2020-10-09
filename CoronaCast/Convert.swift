@@ -26,21 +26,21 @@ class Convert {
     }
     
     
-    func convertDateFormatter(date: String) -> String {
-        
-        // 2020-07-27T07:25:28Z
+    func convertDateFormatter(date: String) -> String? {
 
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss'Z'"//this your string date format
+//        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss'Z'"// 2020-07-27T07:25:28Z
+        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSSSSS'Z'"// 2020-10-08T20:00:13.7212903Z
+
         dateFormatter.timeZone = NSTimeZone(name: "UTC") as TimeZone?
         dateFormatter.locale = Locale(identifier: "US")
-        let convertedDate = dateFormatter.date(from: date)
+        guard let convertedDate = dateFormatter.date(from: date) else { return nil}
 
         dateFormatter.timeZone = TimeZone.current
         dateFormatter.dateStyle = .long
         dateFormatter.timeStyle = .long
 
-        let timeStamp = dateFormatter.string(from: convertedDate!)
+        let timeStamp = dateFormatter.string(from: convertedDate)
 
        return timeStamp
     }

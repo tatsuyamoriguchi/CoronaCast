@@ -11,6 +11,7 @@
 		8C2A345024D151B500B689B5 /* NewsFeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C2A344F24D151B500B689B5 /* NewsFeedViewController.swift */; };
 		8C2A345224D156DC00B689B5 /* NewsData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C2A345124D156DC00B689B5 /* NewsData.swift */; };
 		8C376E9424C54B7000A6DB0B /* GlobalData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C376E9324C54B7000A6DB0B /* GlobalData.swift */; };
+		8C62D809252C5224009F5FF1 /* CoronaStatsData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C62D808252C5224009F5FF1 /* CoronaStatsData.swift */; };
 		8C66EF7324CD493000D8B53C /* CountriesData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C66EF7224CD493000D8B53C /* CountriesData.swift */; };
 		8C6A8B4F24D66B9800B5C285 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C6A8B4E24D66B9800B5C285 /* CloudKit.framework */; };
 		8C6BD29224D3E7EE00F83B21 /* NewsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C6BD29124D3E7EE00F83B21 /* NewsViewController.swift */; };
@@ -32,6 +33,7 @@
 		8C2A344F24D151B500B689B5 /* NewsFeedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsFeedViewController.swift; sourceTree = "<group>"; };
 		8C2A345124D156DC00B689B5 /* NewsData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsData.swift; sourceTree = "<group>"; };
 		8C376E9324C54B7000A6DB0B /* GlobalData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalData.swift; sourceTree = "<group>"; };
+		8C62D808252C5224009F5FF1 /* CoronaStatsData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoronaStatsData.swift; sourceTree = "<group>"; };
 		8C66EF7224CD493000D8B53C /* CountriesData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountriesData.swift; sourceTree = "<group>"; };
 		8C6A8B4E24D66B9800B5C285 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 		8C6BD29124D3E7EE00F83B21 /* NewsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsViewController.swift; sourceTree = "<group>"; };
@@ -106,6 +108,7 @@
 				8C6BD29124D3E7EE00F83B21 /* NewsViewController.swift */,
 				8C7317E324D7FE96001C63D1 /* MessagesTableViewController.swift */,
 				8C376E9324C54B7000A6DB0B /* GlobalData.swift */,
+				8C62D808252C5224009F5FF1 /* CoronaStatsData.swift */,
 				8C66EF7224CD493000D8B53C /* CountriesData.swift */,
 				8C2A345124D156DC00B689B5 /* NewsData.swift */,
 				8C7317E624D808FD001C63D1 /* Message.swift */,
@@ -199,6 +202,7 @@
 				8CA893EF24C264AC004A7315 /* SceneDelegate.swift in Sources */,
 				8C2A345024D151B500B689B5 /* NewsFeedViewController.swift in Sources */,
 				8C7317E724D808FD001C63D1 /* Message.swift in Sources */,
+				8C62D809252C5224009F5FF1 /* CoronaStatsData.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -344,7 +348,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = CoronaCast/CoronaCast.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_TEAM = GY7BG2G9TC;
 				INFOPLIST_FILE = CoronaCast/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -365,7 +369,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = CoronaCast/CoronaCast.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_TEAM = GY7BG2G9TC;
 				INFOPLIST_FILE = CoronaCast/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
