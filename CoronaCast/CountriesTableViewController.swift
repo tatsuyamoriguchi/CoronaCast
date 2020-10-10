@@ -170,13 +170,12 @@ class CountriesTableViewController: UIViewController, UITableViewDelegate, UITab
 
 extension CountriesTableViewController: UISearchBarDelegate {
 
-//    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-//        
-//        
-//        filteredCountryData = countryData
-//        self.searchBar.endEditing(true)
-//        tableView.reloadData()
-//    }
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+       
+        //filteredCountryData = countryData
+        self.searchBar.endEditing(true)
+        //tableView.reloadData()
+    }
     
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar)
