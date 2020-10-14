@@ -191,7 +191,11 @@ class DashboardTableViewController: UITableViewController {
                       
                         if locationData.isoCode == self.selectedCountryISO2 {
  
-                            self.CountryDataDateLabel.text = self.globalDataDateIntFormatted
+                            if let countryDataTime = result?.updatedDateTime {
+                                self.CountryDataDateLabel.text = Convert().convertDateFormatter(date: countryDataTime) } else {
+                                self.CountryDataDateLabel.text = "Country Data Timestamp Not Available"
+                            }  // self.globalDataDateIntFormatted
+                            
                             self.CountryDeathsDataLabel.text = Convert().decimalInLocale(input: countryStats.newDeaths)
                             self.CountryTotalDeathsDataLabel.text = Convert().decimalInLocale(input: countryStats.totalDeaths)
                             self.CountryDeathRateDataLabel.text = Convert().decimal2Percentage(numerator: countryStats.totalDeaths, denominator: countryStats.totalConfirmedCases)

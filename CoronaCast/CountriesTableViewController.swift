@@ -30,7 +30,6 @@ class CountriesTableViewController: UIViewController, UITableViewDelegate, UITab
         } else {
             selectedCountryLabel.text = "Country Not Selected"
         }
-        //selectedCountryLabel.text = selectedCountry
 
         let url = GlobalData().url
         getData(from: url)
