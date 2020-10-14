@@ -14,6 +14,7 @@ import Foundation
 class GlobalData {
 
     let url = "https://api.covid19api.com/summary"
+    // Subscription info: https://covid19api.com
 
 }
 

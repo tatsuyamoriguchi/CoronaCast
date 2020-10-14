@@ -11,19 +11,9 @@ import Foundation
 class NewsData {
     
     // See new info at https://rapidapi.com/SmartableAI/api/coronavirus-smartable?endpoint=apiendpoint_f638b6c0-b9f2-4204-bffa-1bd0107c4cc0
-    
-    // old one
-//    let baseUrl = "https://api.smartable.ai/coronavirus/news/"
+
     let baseUrl = "https://coronavirus-smartable.p.rapidapi.com/news/v1/"
-    // "https://coronavirus-smartable.p.rapidapi.com/news/v1/"
-//    let baseUrl = "https://coronavirus-smartable.p.rapidapi.com/"
     let locationUrl: String = "global"
-    // old one
-    // let subscription = "?subscription-key=1b498132b75d49ebbe65e3f9cfe70c45"
-    //let subscription = "?x-rapidapi-key=951fa88c89mshba15f133217e822p13c0eejsn7d6f6962e3bf"
- 
-    //  https://coronavirus-smartable.p.rapidapi.com/news/v1/global?x-rapidapi-key=951fa88c89mshba15f133217e822p13c0eejsn7d6f6962e3bf
-    
     
 }
 

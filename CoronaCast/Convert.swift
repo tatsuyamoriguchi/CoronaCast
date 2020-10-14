@@ -29,8 +29,8 @@ class Convert {
     func convertDateFormatter(date: String) -> String? {
 
         let dateFormatter = DateFormatter()
-//        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss'Z'"// 2020-07-27T07:25:28Z
-        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSSSSS'Z'"// 2020-10-08T20:00:13.7212903Z
+        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss'Z'"// 2020-07-27T07:25:28Z
+//        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSSSSS'Z'"// 2020-10-08T20:00:13.7212903Z
 
         dateFormatter.timeZone = NSTimeZone(name: "UTC") as TimeZone?
         dateFormatter.locale = Locale(identifier: "US")

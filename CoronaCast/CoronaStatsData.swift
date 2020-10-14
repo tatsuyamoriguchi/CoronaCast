@@ -8,7 +8,7 @@
 
 import Foundation
 
-
+// Smartable AI's REST API is not suitable to list up country data. This file is not used for now.
 // MARK: - rapidapi Smartable AI stats API
 
 class CoronaStatsData {
