@@ -1,5 +1,6 @@
 # CoronaCast
-https://github.com/tatsuyamoriguchi/CoronaCast/blob/master/CoronaCast/Assets.xcassets/AppIcon.appiconset/coronacast%20120.png
+![image](https://github.com/tatsuyamoriguchi/CoronaCast/assets/25876806/0fcd8028-3704-4472-85da-555185999dc8)
+
 
 An app offers COVID-19 world-wide stats from Covid19 API (Data sourcing from Johns Hopkins University) and news feed from smartable.ai REST API servers
 
